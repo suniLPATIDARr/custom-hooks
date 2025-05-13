@@ -1,11 +1,11 @@
-import { FocusableInput } from "./uses/focusUse";
+import { Dropdown } from "./uses/clickOutSideUse";
 
 function App() {
   return (
     <div className="App">
      <h1>Custom hooks typescript</h1>
      https://bigfrontend.dev/react
-     <FocusableInput/>
+     <Dropdown/>
     </div>
   );
 }
