@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>What is Tailwind CSS? Complete Guide</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    // Tailwind config for custom color
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1DA1F2',
+          },
+        },
+      },
+    };
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-200 min-h-screen p-6 font-sans">
+
+  <main class="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
+    <h1 class="text-4xl font-bold mb-6 text-primary">What is Tailwind CSS?</h1>
+
+    <p class="mb-6 text-lg leading-relaxed">
+      <strong>Tailwind CSS</strong> is a <em>utility-first CSS framework</em> for rapidly building custom user interfaces.
+      Instead of writing traditional CSS stylesheets with classes and selectors, you use <strong>small, atomic utility classes</strong>
+      directly in your HTML to style elements.
+    </p>
+
+    <h2 class="text-2xl font-semibold mb-4">Key Idea: Utility-First</h2>
+    <ul class="list-disc list-inside mb-6 space-y-2">
+      <li>Tailwind provides <strong>hundreds of tiny CSS classes</strong> like:
+        <code class="bg-gray-100 text-sm px-1 rounded">p-4</code> (padding 1rem),
+        <code class="bg-gray-100 text-sm px-1 rounded">text-center</code> (center text),
+        <code class="bg-gray-100 text-sm px-1 rounded">bg-blue-500</code> (blue background), and layout utilities like
+        <code class="bg-gray-100 text-sm px-1 rounded">flex</code>, <code class="bg-gray-100 text-sm px-1 rounded">grid</code>, <code class="bg-gray-100 text-sm px-1 rounded">items-center</code>.
+      </li>
+      <li>These classes <strong>can be composed</strong> directly in your markup, avoiding the need for custom CSS most of the time.</li>
+    </ul>
+
+    <h2 class="text-2xl font-semibold mb-4">Why Tailwind CSS?</h2>
+    <table class="w-full mb-6 border border-gray-300 dark:border-gray-700 text-left text-sm">
+      <thead class="bg-gray-100 dark:bg-gray-700">
+        <tr>
+          <th class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">Benefit</th>
+          <th class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">Explanation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700">
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600 font-semibold">Rapid UI Development</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">Build layouts fast without writing CSS</td>
+        </tr>
+        <tr class="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700">
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600 font-semibold">No naming battles</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">No more arguing about class names or CSS specificity</td>
+        </tr>
+        <tr class="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700">
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600 font-semibold">Highly customizable</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">Use configuration files to define your design system</td>
+        </tr>
+        <tr class="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700">
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600 font-semibold">Responsive & state variants</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">Add classes for mobile, hover, focus, dark mode etc. easily</td>
+        </tr>
+        <tr class="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700">
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600 font-semibold">Low specificity issues</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">Utility classes have low CSS specificity and don’t conflict much</td>
+        </tr>
+        <tr class="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700">
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600 font-semibold">Small CSS bundle</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">With purging unused styles, output CSS is tiny and fast</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="text-2xl font-semibold mb-4">How Tailwind CSS Works</h2>
+    <ol class="list-decimal list-inside mb-6 space-y-2">
+      <li>Install Tailwind in your project (via npm, CDN, or frameworks like Next.js).</li>
+      <li>Use utility classes in your HTML/JSX.</li>
+      <li>Run build process to generate CSS with only the used classes.</li>
+      <li>Tailwind applies styles via generated CSS classes.</li>
+    </ol>
+
+    <h2 class="text-2xl font-semibold mb-4">Example</h2>
+    <pre class="bg-gray-100 dark:bg-gray-700 p-4 rounded mb-6 overflow-x-auto"><code>&lt;button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"&gt;
+  Click me
+&lt;/button&gt;
+</code></pre>
+    <p class="mb-6">
+      Explanation:
+      <ul class="list-disc list-inside mt-2">
+        <li><code>bg-blue-500</code>: blue background</li>
+        <li><code>hover:bg-blue-700</code>: darker blue on hover</li>
+        <li><code>text-white</code>: white text</li>
+        <li><code>font-bold</code>: bold font</li>
+        <li><code>py-2 px-4</code>: vertical & horizontal padding</li>
+        <li><code>rounded</code>: rounded corners</li>
+      </ul>
+    </p>
+
+    <h2 class="text-2xl font-semibold mb-4">Customizing Tailwind</h2>
+    <pre class="bg-gray-100 dark:bg-gray-700 p-4 rounded mb-6 overflow-x-auto"><code>module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#1DA1F2',
+      },
+    },
+  },
+  variants: {},
+  plugins: [],
+};
+</code></pre>
+
+    <p class="mb-6">You can add your own custom colors, fonts, spacing, enable variants (focus, hover, dark mode), and use plugins.</p>
+
+    <h2 class="text-2xl font-semibold mb-4">Responsive Design</h2>
+    <p class="mb-4">Tailwind includes built-in responsive prefixes:</p>
+    <table class="w-full mb-6 border border-gray-300 dark:border-gray-700 text-left text-sm">
+      <thead class="bg-gray-100 dark:bg-gray-700">
+        <tr>
+          <th class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">Prefix</th>
+          <th class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">Screensize</th>
+          <th class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700">
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600"><code>sm:</code></td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">≥ 640px</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600"><code>sm:text-lg</code></td>
+        </tr>
+        <tr class="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700">
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600"><code>md:</code></td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">≥ 768px</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600"><code>md:bg-red-500</code></td>
+        </tr>
+        <tr class="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700">
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600"><code>lg:</code></td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">≥ 1024px</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600"><code>lg:flex</code></td>
+        </tr>
+        <tr class="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700">
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600"><code>xl:</code></td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">≥ 1280px</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600"><code>xl:grid</code></td>
+        </tr>
+        <tr class="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-800 dark:even:bg-gray-700">
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600"><code>2xl:</code></td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600">≥ 1536px</td>
+          <td class="px-4 py-2 border-b border-gray-300 dark:border-gray-600"><code>2xl:container</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="text-2xl font-semibold mb-4">State Variants</h2>
+    <p class="mb-6">Tailwind supports many variants like <code>hover:</code>, <code>focus:</code>, <code>active:</code>, <code>disabled:</code>, <code>dark:</code>, etc.</p>
+    <pre class="bg-gray-100 dark:bg-gray-700 p-4 rounded mb-6 overflow-x-auto"><code>&lt;button class="bg-green-500 hover:bg-green-700 focus:outline-none focus:ring-4 focus:ring-green-300"&gt;
+  Submit
+&lt;/button&gt;
+</code></pre>
+
+    <h2 class="text-2xl font-semibold mb-4">Summary</h2>
+    <p>
+      Tailwind CSS is a modern, utility-first CSS framework that makes styling faster, easier, and more consistent by
+      using small reusable utility classes instead of custom CSS rules. It supports responsive design, theming, and
+      state variants out of the box, and can be fully customized to fit your project's design system.
+    </p>
+
+  </main>
+  
+</body>
+</html>

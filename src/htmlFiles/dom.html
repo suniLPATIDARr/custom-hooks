@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Traversal & Manipulation Demo</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+        line-height: 1.6;
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 8px 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #f5f5f5;
+      }
+      .highlight {
+        background-color: yellow;
+      }
+      ul {
+        margin-top: 10px;
+        padding-left: 20px;
+      }
+      li {
+        margin: 4px 0;
+      }
+      code {
+        background: #f4f4f4;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🧠 DOM Traversal & Manipulation Demo</h1>
+
+    <h2>📋 Cheat Sheet</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Selector / Property</th>
+          <th>Description</th>
+          <th>Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>document.getElementById(id)</code></td>
+          <td>Selects an element by ID</td>
+          <td><code>document.getElementById('app')</code></td>
+        </tr>
+        <tr>
+          <td><code>document.querySelector()</code></td>
+          <td>First match using CSS selector</td>
+          <td><code>document.querySelector('.box')</code></td>
+        </tr>
+        <tr>
+          <td><code>document.querySelectorAll()</code></td>
+          <td>All matches using CSS selector</td>
+          <td><code>document.querySelectorAll('li')</code></td>
+        </tr>
+        <tr>
+          <td><code>element.children</code></td>
+          <td>Child elements (no text nodes)</td>
+          <td><code>parent.children</code></td>
+        </tr>
+        <tr>
+          <td><code>element.childNodes</code></td>
+          <td>All child nodes (includes text)</td>
+          <td><code>parent.childNodes</code></td>
+        </tr>
+        <tr>
+          <td><code>element.firstElementChild</code></td>
+          <td>First child element</td>
+          <td><code>parent.firstElementChild</code></td>
+        </tr>
+        <tr>
+          <td><code>element.parentNode</code></td>
+          <td>Parent node</td>
+          <td><code>child.parentNode</code></td>
+        </tr>
+        <tr>
+          <td><code>element.nextElementSibling</code></td>
+          <td>Next sibling element</td>
+          <td><code>el.nextElementSibling</code></td>
+        </tr>
+        <tr>
+          <td><code>element.appendChild()</code></td>
+          <td>Adds a new child</td>
+          <td><code>el.appendChild(newDiv)</code></td>
+        </tr>
+        <tr>
+          <td><code>element.removeChild()</code></td>
+          <td>Removes a child</td>
+          <td><code>el.removeChild(child)</code></td>
+        </tr>
+        <tr>
+          <td><code>element.replaceChild()</code></td>
+          <td>Replaces a child</td>
+          <td><code>el.replaceChild(new, old)</code></td>
+        </tr>
+        <tr>
+          <td><code>document.createElement()</code></td>
+          <td>Creates a new element</td>
+          <td><code>document.createElement('div')</code></td>
+        </tr>
+        <tr>
+          <td><code>element.textContent</code></td>
+          <td>Gets or sets text</td>
+          <td><code>el.textContent = 'Hello'</code></td>
+        </tr>
+        <tr>
+          <td><code>element.innerHTML</code></td>
+          <td>Gets or sets HTML</td>
+          <td><code>el.innerHTML = '&lt;b&gt;Hi&lt;/b&gt;'</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>🔧 Interactive DOM Demo</h2>
+    <div id="app">
+      <h3>Hello DOM</h3>
+      <ul>
+        <li>One</li>
+        <li id="second">Two</li>
+        <li>Three</li>
+      </ul>
+    </div>
+
+    <script>
+      // Accessing elements
+      const app = document.getElementById("app");
+      const list = app.querySelector("ul");
+      const secondItem = document.getElementById("second");
+
+      // DOM Traversal examples
+      console.log("Parent Node:", secondItem.parentNode);
+      console.log("First Child of UL:", list.firstElementChild.textContent);
+      console.log(
+        "Next Sibling of Second Item:",
+        secondItem.nextElementSibling.textContent
+      );
+
+      // Create and append a new element
+      const newItem = document.createElement("li");
+      newItem.textContent = "Four";
+      list.appendChild(newItem);
+
+      // Replace the second item
+      const replacement = document.createElement("li");
+      replacement.textContent = "Replaced Item";
+      list.replaceChild(replacement, secondItem);
+
+      // Remove the last item
+      list.removeChild(list.lastElementChild);
+
+      // Highlight the replacement
+      replacement.classList.add("highlight");
+
+      // Log updated DOM
+      console.log("Updated UL:", list.innerHTML);
+    </script>
+  </body>
+</html>

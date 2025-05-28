@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Execution Context & Call Stack Demo</title>
+    <style>
+      body {
+        font-family: monospace;
+        background: #f0f0f0;
+        margin: 20px;
+      }
+      #output {
+        background: #222;
+        color: #0f0;
+        padding: 10px;
+        min-height: 80px;
+        margin-bottom: 20px;
+        white-space: pre-wrap;
+      }
+      #callstack {
+        background: #fff;
+        border: 1px solid #aaa;
+        padding: 10px;
+        width: 250px;
+        margin-bottom: 20px;
+      }
+      .stack-frame {
+        background: #eee;
+        border: 1px solid #999;
+        margin: 5px 0;
+        padding: 5px 10px;
+        border-radius: 4px;
+      }
+      button {
+        margin-right: 10px;
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>JS Execution Context & Call Stack Interactive Demo</h2>
+
+    <div id="output"></div>
+
+    <div>
+      <strong>Call Stack (top → bottom):</strong>
+      <div id="callstack"></div>
+    </div>
+
+    <button id="prevBtn" disabled>◀ Previous Step</button>
+    <button id="nextBtn">Next Step ▶</button>
+
+    <script>
+      const steps = [
+        {
+          desc: "Start: Call stack is empty",
+          output: "",
+          stack: [],
+        },
+        {
+          desc: "Global Execution Context is created and pushed.",
+          output: "",
+          stack: ["Global EC"],
+        },
+        {
+          desc: 'Run console.log("Global start")',
+          output: "Global start",
+          stack: ["Global EC"],
+        },
+        {
+          desc: "Call first() → push first EC",
+          output: "",
+          stack: ["first EC", "Global EC"],
+        },
+        {
+          desc: 'Inside first(), run console.log("Inside first")',
+          output: "Inside first",
+          stack: ["first EC", "Global EC"],
+        },
+        {
+          desc: "Call second() inside first() → push second EC",
+          output: "",
+          stack: ["second EC", "first EC", "Global EC"],
+        },
+        {
+          desc: 'Inside second(), run console.log("Inside second")',
+          output: "Inside second",
+          stack: ["second EC", "first EC", "Global EC"],
+        },
+        {
+          desc: "second() finishes → pop second EC",
+          output: "",
+          stack: ["first EC", "Global EC"],
+        },
+        {
+          desc: 'Back in first(), run console.log("Back to first")',
+          output: "Back to first",
+          stack: ["first EC", "Global EC"],
+        },
+        {
+          desc: "first() finishes → pop first EC",
+          output: "",
+          stack: ["Global EC"],
+        },
+        {
+          desc: 'Back in global, run console.log("Global end")',
+          output: "Global end",
+          stack: ["Global EC"],
+        },
+        {
+          desc: "Program finishes → pop Global EC",
+          output: "",
+          stack: [],
+        },
+      ];
+
+      let currentStep = 0;
+
+      const outputEl = document.getElementById("output");
+      const callstackEl = document.getElementById("callstack");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      function render() {
+        const step = steps[currentStep];
+        outputEl.textContent = step.output
+          ? `Output:\n${step.output}`
+          : "No output";
+        callstackEl.innerHTML = "";
+
+        if (step.stack.length === 0) {
+          callstackEl.textContent = "(empty)";
+        } else {
+          // Render from top to bottom (top of stack on top)
+          step.stack.forEach((ctx) => {
+            const frame = document.createElement("div");
+            frame.className = "stack-frame";
+            frame.textContent = ctx;
+            callstackEl.appendChild(frame);
+          });
+        }
+
+        // Buttons enable/disable
+        prevBtn.disabled = currentStep === 0;
+        nextBtn.disabled = currentStep === steps.length - 1;
+
+        // Description (optional)
+        outputEl.textContent += `\n\nStep ${currentStep + 1}/${steps.length}\n${
+          step.desc
+        }`;
+      }
+
+      prevBtn.addEventListener("click", () => {
+        if (currentStep > 0) {
+          currentStep--;
+          render();
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (currentStep < steps.length - 1) {
+          currentStep++;
+          render();
+        }
+      });
+
+      // Initial render
+      render();
+    </script>
+  </body>
+</html>

@@ -1,10 +1,12 @@
-import { SearchInput } from "./uses/debounceUse";
+import { Dropdown } from "./uses/clickOutSideUse";
 
 function App() {
   return (
     <div className="App">
      <h1>Custom hooks typescript</h1>
-     <SearchInput/>
+     https://bigfrontend.dev/react
+     hahaha
+     <Dropdown/>
     </div>
   );
 }
