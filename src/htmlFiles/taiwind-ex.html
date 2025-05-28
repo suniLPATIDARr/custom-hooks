@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Complete Tailwind CSS Demo</title>
+    <!-- Tailwind CSS CDN with JIT mode -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      // Tailwind config: adding custom color and enabling dark mode class strategy
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#1DA1F2",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body
+    class="bg-gray-100 dark:bg-gray-900 transition-colors duration-500 min-h-screen flex flex-col items-center justify-center p-6"
+  >
+    <!-- Dark Mode Toggle Button -->
+    <button
+      id="darkToggle"
+      class="mb-6 px-4 py-2 rounded bg-primary text-white hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
+    >
+      Toggle Dark Mode
+    </button>
+
+    <!-- Card container -->
+    <div
+      class="max-w-md w-full bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden"
+    >
+      <img
+        class="w-full h-48 object-cover"
+        src="https://source.unsplash.com/featured/?nature"
+        alt="Nature Image"
+      />
+      <div class="p-6">
+        <h2 class="text-3xl font-bold mb-3 text-gray-900 dark:text-white">
+          Tailwind CSS Complete Demo
+        </h2>
+        <p class="text-gray-700 dark:text-gray-300 mb-5">
+          This demo showcases core Tailwind CSS features like utility-first
+          styling, responsive design, hover and focus states, dark mode support,
+          and customization.
+        </p>
+
+        <!-- Responsive text example -->
+        <p
+          class="mb-4 text-sm sm:text-base md:text-lg lg:text-xl text-gray-800 dark:text-gray-200"
+        >
+          Resize the window to see responsive text sizes.
+        </p>
+
+        <!-- Buttons with state variants -->
+        <div>
+          <button
+            class="bg-primary hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded mr-3 transition duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-blue-300"
+          >
+            Primary Action
+          </button>
+          <button
+            class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-5 rounded transition duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-gray-400"
+          >
+            Secondary Action
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-12 text-gray-600 dark:text-gray-400">
+      <p>
+        Made with ❤️ using
+        <a
+          href="https://tailwindcss.com/"
+          target="_blank"
+          rel="noopener"
+          class="underline hover:text-primary"
+          >Tailwind CSS</a
+        >
+      </p>
+    </footer>
+
+    <script>
+      // Dark mode toggle logic
+      const toggle = document.getElementById("darkToggle");
+      toggle.addEventListener("click", () => {
+        document.documentElement.classList.toggle("dark");
+      });
+    </script>
+  </body>
+</html>

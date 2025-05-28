@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Micro-Frontend with React & Module Federation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+        max-width: 900px;
+        margin: auto;
+      }
+      code,
+      pre {
+        background: #f0f0f0;
+        padding: 8px;
+        display: block;
+        overflow-x: auto;
+        margin-bottom: 1em;
+      }
+      h2 {
+        margin-top: 2em;
+        color: #2c3e50;
+      }
+      ul {
+        margin-left: 20px;
+      }
+      hr {
+        margin: 2em 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🧩 Micro-Frontend Example Using React + Webpack Module Federation</h1>
+
+    <p>
+      This document explains how to build a simple micro-frontend architecture
+      using React and Webpack 5's Module Federation.
+    </p>
+
+    <h2>📁 Project Structure</h2>
+    <pre><code>root/
+├── host/         (Main shell, loads remote app)
+└── remote/       (Micro-frontend exposed to host)
+</code></pre>
+
+    <h2>✅ 1. Remote App (<code>remote/</code>)</h2>
+
+    <h3>remote/src/Button.js</h3>
+    <pre><code>import React from 'react';
+
+const Button = () => {
+  return &lt;button style={{ padding: '10px 20px' }}&gt;Remote Button&lt;/button&gt;;
+};
+
+export default Button;
+</code></pre>
+
+    <h3>remote/src/bootstrap.js</h3>
+    <pre><code>import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Button from './Button';
+
+const App = () =&gt; (
+  &lt;div&gt;
+    &lt;h2&gt;Remote App&lt;/h2&gt;
+    &lt;Button /&gt;
+  &lt;/div&gt;
+);
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(&lt;App /&gt;);
+</code></pre>
+
+    <h3>remote/src/index.js</h3>
+    <pre><code>import('./bootstrap');
+</code></pre>
+
+    <h3>remote/webpack.config.js</h3>
+    <pre><code>const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
+
+module.exports = {
+  entry: './src/index.js',
+  mode: 'development',
+  devServer: {
+    port: 3001,
+  },
+  output: {
+    publicPath: 'auto',
+  },
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'remote',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Button': './src/Button',
+      },
+      shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
+    }),
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }),
+  ],
+};
+</code></pre>
+
+    <h3>remote/public/index.html</h3>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+    <hr />
+
+    <h2>✅ 2. Host App (<code>host/</code>)</h2>
+
+    <h3>host/src/App.js</h3>
+    <pre><code>import React, { Suspense } from 'react';
+
+const RemoteButton = React.lazy(() =&gt; import('remote/Button'));
+
+function App() {
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;Host App&lt;/h1&gt;
+      &lt;Suspense fallback={&lt;div&gt;Loading remote button...&lt;/div&gt;}&gt;
+        &lt;RemoteButton /&gt;
+      &lt;/Suspense&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre>
+
+    <h3>host/src/bootstrap.js</h3>
+    <pre><code>import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(&lt;App /&gt;);
+</code></pre>
+
+    <h3>host/src/index.js</h3>
+    <pre><code>import('./bootstrap');
+</code></pre>
+
+    <h3>host/webpack.config.js</h3>
+    <pre><code>const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
+
+module.exports = {
+  entry: './src/index.js',
+  mode: 'development',
+  devServer: {
+    port: 3000,
+  },
+  output: {
+    publicPath: 'auto',
+  },
+  plugins: [
+    new ModuleFederationPlugin({
+      name: 'host',
+      remotes: {
+        remote: 'remote@http://localhost:3001/remoteEntry.js',
+      },
+      shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
+    }),
+    new HtmlWebpackPlugin({
+      template: './public/index.html',
+    }),
+  ],
+};
+</code></pre>
+
+    <h3>host/public/index.html</h3>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+    <hr />
+
+    <h2>📦 Install Dependencies (in both apps)</h2>
+    <pre><code>npm install react react-dom webpack webpack-cli webpack-dev-server html-webpack-plugin</code></pre>
+
+    <h2>▶️ Run the Apps</h2>
+    <ul>
+      <li><code>cd remote &amp;&amp; npm start</code></li>
+      <li><code>cd host &amp;&amp; npm start</code></li>
+      <li>Visit <code>http://localhost:3000</code> in your browser</li>
+    </ul>
+
+    <h2>🧠 Summary</h2>
+    <ul>
+      <li>
+        <strong>remote</strong> exposes a Button component via Webpack Module
+        Federation
+      </li>
+      <li>
+        <strong>host</strong> dynamically loads and renders the remote component
+      </li>
+      <li>Both can be developed and deployed separately</li>
+    </ul>
+  </body>
+</html>

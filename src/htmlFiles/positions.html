@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS Position Demo</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        padding-bottom: 200px;
+      }
+
+      section {
+        padding: 20px;
+        margin-bottom: 100px;
+        border: 2px dashed #ccc;
+      }
+
+      .box {
+        width: 150px;
+        height: 100px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        border-radius: 8px;
+      }
+
+      .static-box {
+        background: #aaa;
+        position: static;
+      }
+
+      .relative-box {
+        background: #e67e22;
+        position: relative;
+        top: 20px;
+        left: 30px;
+      }
+
+      .absolute-container {
+        position: relative;
+        height: 200px;
+        background: #f0f0f0;
+        margin-top: 40px;
+        border: 1px solid #999;
+      }
+
+      .absolute-box {
+        background: #3498db;
+        position: absolute;
+        top: 30px;
+        right: 30px;
+      }
+
+      .fixed-box {
+        background: #e74c3c;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 999;
+      }
+
+      .sticky-container {
+        height: 1000px;
+        padding-top: 60px;
+        background: green;
+      }
+
+      .sticky-header {
+        background: #8e44ad;
+        color: white;
+        padding: 10px 20px;
+        font-size: 18px;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+    </style>
+  </head>
+  <body>
+    <ul>
+      <li><strong>static</strong>: normal position</li>
+      <li><strong>relative</strong>: offset from normal spot</li>
+      <li><strong>absolute</strong>: positioned inside a relative container</li>
+      <li><strong>sticky</strong>: header sticks on scroll</li>
+      <li>
+        <strong>fixed</strong>: red box stays at bottom right during scroll
+      </li>
+    </ul>
+    <section>
+      <h2>1. Static (default)</h2>
+      <div class="box static-box">Static</div>
+    </section>
+
+    <section>
+      <h2>2. Relative</h2>
+      <div class="box relative-box">Relative</div>
+    </section>
+
+    <section>
+      <h2>3. Absolute (inside relative container)</h2>
+      <div class="absolute-container">
+        <div class="box absolute-box">Absolute</div>
+      </div>
+    </section>
+
+    <section class="sticky-container">
+      <div class="sticky-header">4. Sticky Header</div>
+      <p>Scroll down to see sticky effect...</p>
+      <p style="margin-top: 800px">End of sticky section</p>
+    </section>
+
+    <div class="box fixed-box">5. Fixed</div>
+  </body>
+</html>
